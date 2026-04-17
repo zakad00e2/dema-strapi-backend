@@ -1,0 +1,29 @@
+{
+  "collectionName": "components_shared_marketing_groups",
+  "info": {
+    "displayName": "Marketing Group",
+    "description": "Admin-defined marketing block with title, points, and images",
+    "icon": "layout"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true,
+      "maxLength": 120
+    },
+    "points": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.bullet-point"
+    },
+    "images": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    }
+  }
+}

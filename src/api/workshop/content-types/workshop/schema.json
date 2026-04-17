@@ -1,0 +1,67 @@
+{
+  "kind": "collectionType",
+  "collectionName": "workshops",
+  "info": {
+    "singularName": "workshop",
+    "pluralName": "workshops",
+    "displayName": "Workshop",
+    "description": "Workshop / training session"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "workshopType": {
+      "type": "enumeration",
+      "enum": [
+        "Private Workshop",
+        "Open Workshops"
+      ],
+      "required": true,
+      "displayName": "Workshop Type"
+    },
+    "title": {
+      "type": "string",
+      "required": true,
+      "maxLength": 120
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title",
+      "required": true
+    },
+    "shortDescription": {
+      "type": "text",
+      "maxLength": 280
+    },
+    "whatYouWillLearnPoints": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.bullet-point",
+      "displayName": "What You'll Learn"
+    },
+    "formatDetails": {
+      "type": "text",
+      "displayName": "Format"
+    },
+    "datesDetails": {
+      "type": "text",
+      "displayName": "Dates"
+    },
+    "mainImage": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": ["images"]
+    },
+    "featured": {
+      "type": "boolean",
+      "default": false
+    },
+    "displayOrder": {
+      "type": "integer",
+      "default": 0
+    }
+  }
+}
