@@ -160,6 +160,64 @@ const normalizeEntityMedia = async (strapi, uid, data, cache = new Map()) => {
   return data;
 };
 
+const populateMissingSharedFields = async (strapi, ctx) => {
+  if (!['create', 'update', 'publish'].includes(ctx.action) || !ctx.params?.data || !ctx.params?.documentId) {
+    return;
+  }
+
+  const i18n = strapi.plugin('i18n');
+
+  if (!i18n) {
+    return;
+  }
+
+  const contentTypesService = i18n.service('content-types');
+  const schema = strapi.getModel(ctx.uid);
+
+  if (!schema || !contentTypesService.isLocalizedContentType(schema)) {
+    return;
+  }
+
+  const targetLocale = ctx.params.locale ?? ctx.params.data.locale;
+
+  if (!targetLocale) {
+    return;
+  }
+
+  const targetLocaleEntry = await strapi.db.query(ctx.uid).findOne({
+    where: {
+      documentId: ctx.params.documentId,
+      locale: targetLocale,
+    },
+    select: ['id'],
+  });
+
+  if (targetLocaleEntry) {
+    return;
+  }
+
+  const populate = contentTypesService.getNestedPopulateOfNonLocalizedAttributes(ctx.uid);
+  const where = {
+    documentId: ctx.params.documentId,
+  };
+  where.locale = { $ne: targetLocale };
+
+  const sourceEntry = await strapi.db.query(ctx.uid).findOne({
+    where,
+    populate,
+  });
+
+  if (!sourceEntry) {
+    return;
+  }
+
+  contentTypesService.fillNonLocalizedAttributes(
+    ctx.params.data,
+    sourceEntry,
+    { model: ctx.uid }
+  );
+};
+
 const ensureI18nLocales = async (strapi) => {
   const i18n = strapi.plugin('i18n');
 
@@ -189,9 +247,11 @@ module.exports = {
         return next();
       }
 
-      if (!['create', 'update'].includes(ctx.action) || !ctx.params?.data) {
+      if (!['create', 'update', 'publish'].includes(ctx.action) || !ctx.params?.data) {
         return next();
       }
+
+      await populateMissingSharedFields(strapi, ctx);
 
       ctx.params.data = await normalizeEntityMedia(
         strapi,

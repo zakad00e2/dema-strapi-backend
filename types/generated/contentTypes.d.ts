@@ -434,7 +434,7 @@ export interface ApiWorkWork extends Struct.CollectionTypeSchema {
   collectionName: 'works';
   info: {
     description: 'Portfolio project / case study';
-    displayName: 'Work';
+    displayName: 'Portfolio';
     pluralName: 'works';
     singularName: 'work';
   };
@@ -472,7 +472,6 @@ export interface ApiWorkWork extends Struct.CollectionTypeSchema {
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     displayOrder: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
-    featured: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     gallery: Schema.Attribute.Media<'images' | 'videos', true>;
     launchEventExperiencePoints: Schema.Attribute.Component<
       'shared.bullet-point',
@@ -567,7 +566,6 @@ export interface ApiWorkshopWorkshop extends Struct.CollectionTypeSchema {
         };
       }>;
     displayOrder: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
-    featured: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     formatDetails: Schema.Attribute.Text &
       Schema.Attribute.SetPluginOptions<{
         i18n: {

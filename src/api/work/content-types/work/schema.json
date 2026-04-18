@@ -4,7 +4,7 @@
   "info": {
     "singularName": "work",
     "pluralName": "works",
-    "displayName": "Work",
+    "displayName": "Portfolio",
     "description": "Portfolio project / case study"
   },
   "options": {
@@ -127,10 +127,6 @@
           "localized": true
         }
       }
-    },
-    "featured": {
-      "type": "boolean",
-      "default": false
     },
     "displayOrder": {
       "type": "integer",

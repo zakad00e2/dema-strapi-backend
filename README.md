@@ -52,6 +52,8 @@ Supported locales:
 
 In the admin panel, create the English version first, then use the translation
 action or locale switcher to add the Arabic version for the same document.
+Shared fields such as `mainImage`, `gallery`, and `displayOrder`
+are copied automatically from the existing locale when the new translation is created.
 
 REST requests can target a specific language with `locale`:
 
@@ -83,7 +85,6 @@ Useful query params:
 
 - `?populate=*` — include media + components
 - `?populate[mainImage]=true&populate[seo]=true` — populate selectively
-- `?filters[featured][$eq]=true` — only featured items
 - `?sort=displayOrder:asc` — custom ordering
 - `?pagination[page]=1&pagination[pageSize]=12`
 
@@ -114,7 +115,6 @@ const { data } = await res.json();
 | `clientName`       | string              |                               |
 | `projectDate`      | date                |                               |
 | `location`         | string              |                               |
-| `featured`         | boolean             |                               |
 | `displayOrder`     | integer             |                               |
 | `seo`              | component           | `shared.seo`                  |
 
@@ -135,7 +135,6 @@ const { data } = await res.json();
 | `location`         | string              |                               |
 | `price`            | decimal             |                               |
 | `cta`              | component           | `shared.cta` (registration)   |
-| `featured`         | boolean             |                               |
 | `displayOrder`     | integer             |                               |
 | `seo`              | component           | `shared.seo`                  |
 
