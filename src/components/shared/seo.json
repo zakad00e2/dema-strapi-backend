@@ -9,11 +9,21 @@
   "attributes": {
     "metaTitle": {
       "type": "string",
-      "maxLength": 60
+      "maxLength": 60,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "metaDescription": {
       "type": "text",
-      "maxLength": 160
+      "maxLength": 160,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     }
   }
 }

@@ -10,12 +10,21 @@
   "options": {
     "draftAndPublish": true
   },
-  "pluginOptions": {},
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
   "attributes": {
     "title": {
       "type": "string",
       "maxLength": 120,
-      "required": true
+      "required": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "slug": {
       "type": "uid",
@@ -24,7 +33,12 @@
     },
     "shortDescription": {
       "type": "text",
-      "maxLength": 280
+      "maxLength": 280,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "mainImage": {
       "type": "media",
@@ -45,7 +59,12 @@
     },
     "clientName": {
       "type": "string",
-      "maxLength": 120
+      "maxLength": 120,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "clientType": {
       "type": "enumeration",
@@ -58,31 +77,56 @@
     },
     "location": {
       "type": "string",
-      "maxLength": 120
+      "maxLength": 120,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "preEventMarketingPoints": {
       "type": "component",
       "repeatable": false,
       "component": "shared.marketing-group",
-      "displayName": "Pre-Event Marketing"
+      "displayName": "Pre-Event Marketing",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "postEventMarketingPoints": {
       "type": "component",
       "repeatable": false,
       "component": "shared.marketing-group",
-      "displayName": "Post-Event Marketing"
+      "displayName": "Post-Event Marketing",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "launchEventExperiencePoints": {
       "type": "component",
       "repeatable": true,
       "component": "shared.bullet-point",
-      "displayName": "Launch Event Experience"
+      "displayName": "Launch Event Experience",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "campaignImpactPoints": {
       "type": "component",
       "repeatable": true,
       "component": "shared.bullet-point",
-      "displayName": "Campaign Impact"
+      "displayName": "Campaign Impact",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "featured": {
       "type": "boolean",

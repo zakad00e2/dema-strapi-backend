@@ -3,6 +3,10 @@
 const PUBLIC_READ_ACTIONS = ['find', 'findOne'];
 const PUBLIC_READ_CONTENT_TYPES = ['api::work.work', 'api::workshop.workshop'];
 const MEDIA_NORMALIZED_CONTENT_TYPES = new Set(PUBLIC_READ_CONTENT_TYPES);
+const REQUIRED_I18N_LOCALES = [
+  { code: 'en', name: 'English (en)' },
+  { code: 'ar', name: 'Arabic (ar)' },
+];
 
 const isPlainObject = (value) =>
   Object.prototype.toString.call(value) === '[object Object]';
@@ -156,10 +160,30 @@ const normalizeEntityMedia = async (strapi, uid, data, cache = new Map()) => {
   return data;
 };
 
+const ensureI18nLocales = async (strapi) => {
+  const i18n = strapi.plugin('i18n');
+
+  if (!i18n) {
+    return;
+  }
+
+  const localesService = i18n.service('locales');
+
+  for (const locale of REQUIRED_I18N_LOCALES) {
+    const existingLocale = await localesService.findByCode(locale.code);
+
+    if (!existingLocale) {
+      await localesService.create(locale);
+    }
+  }
+};
+
 module.exports = {
   register() {},
 
   async bootstrap({ strapi }) {
+    await ensureI18nLocales(strapi);
+
     strapi.documents.use(async (ctx, next) => {
       if (!MEDIA_NORMALIZED_CONTENT_TYPES.has(ctx.uid)) {
         return next();

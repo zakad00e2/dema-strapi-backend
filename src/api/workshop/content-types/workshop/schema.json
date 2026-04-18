@@ -10,7 +10,11 @@
   "options": {
     "draftAndPublish": true
   },
-  "pluginOptions": {},
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
   "attributes": {
     "workshopType": {
       "type": "enumeration",
@@ -24,7 +28,12 @@
     "title": {
       "type": "string",
       "required": true,
-      "maxLength": 120
+      "maxLength": 120,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "slug": {
       "type": "uid",
@@ -33,21 +42,41 @@
     },
     "shortDescription": {
       "type": "text",
-      "maxLength": 280
+      "maxLength": 280,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "whatYouWillLearnPoints": {
       "type": "component",
       "repeatable": true,
       "component": "shared.bullet-point",
-      "displayName": "What You'll Learn"
+      "displayName": "What You'll Learn",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "formatDetails": {
       "type": "text",
-      "displayName": "Format"
+      "displayName": "Format",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "datesDetails": {
       "type": "text",
-      "displayName": "Dates"
+      "displayName": "Dates",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "mainImage": {
       "type": "media",

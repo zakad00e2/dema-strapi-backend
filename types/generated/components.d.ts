@@ -10,6 +10,11 @@ export interface SharedBulletPoint extends Struct.ComponentSchema {
   attributes: {
     text: Schema.Attribute.String &
       Schema.Attribute.Required &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }> &
       Schema.Attribute.SetMinMaxLength<{
         maxLength: 200;
       }>;
@@ -26,6 +31,11 @@ export interface SharedCta extends Struct.ComponentSchema {
   attributes: {
     label: Schema.Attribute.String &
       Schema.Attribute.Required &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }> &
       Schema.Attribute.SetMinMaxLength<{
         maxLength: 40;
       }>;
@@ -43,9 +53,19 @@ export interface SharedMarketingGroup extends Struct.ComponentSchema {
   };
   attributes: {
     images: Schema.Attribute.Media<'images', true>;
-    points: Schema.Attribute.Component<'shared.bullet-point', true>;
+    points: Schema.Attribute.Component<'shared.bullet-point', true> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     title: Schema.Attribute.String &
       Schema.Attribute.Required &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }> &
       Schema.Attribute.SetMinMaxLength<{
         maxLength: 120;
       }>;
@@ -61,10 +81,20 @@ export interface SharedSeo extends Struct.ComponentSchema {
   };
   attributes: {
     metaDescription: Schema.Attribute.Text &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }> &
       Schema.Attribute.SetMinMaxLength<{
         maxLength: 160;
       }>;
     metaTitle: Schema.Attribute.String &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }> &
       Schema.Attribute.SetMinMaxLength<{
         maxLength: 60;
       }>;

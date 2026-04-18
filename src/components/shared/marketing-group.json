@@ -10,12 +10,22 @@
     "title": {
       "type": "string",
       "required": true,
-      "maxLength": 120
+      "maxLength": 120,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "points": {
       "type": "component",
       "repeatable": true,
-      "component": "shared.bullet-point"
+      "component": "shared.bullet-point",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "images": {
       "type": "media",

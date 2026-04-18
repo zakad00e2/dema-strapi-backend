@@ -10,7 +10,12 @@
     "label": {
       "type": "string",
       "required": true,
-      "maxLength": 40
+      "maxLength": 40,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "url": {
       "type": "string",

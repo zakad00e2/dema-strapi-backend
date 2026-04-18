@@ -24,6 +24,12 @@ script automatically grants the **Public** role `find` + `findOne` access to
 both collections, so the frontend can start reading the API immediately after
 you publish your first entries.
 
+The project is configured for bilingual content entry:
+
+- English (`en`) is the default locale on first boot.
+- Arabic (`ar`) is added automatically if it does not exist yet.
+- `Work` and `Workshop` entries can store separate localized text per language.
+
 ### Generating the secrets in `.env`
 
 Each of `APP_KEYS`, `API_TOKEN_SALT`, `ADMIN_JWT_SECRET`, `TRANSFER_TOKEN_SALT`,
@@ -34,6 +40,29 @@ node -e "console.log(require('crypto').randomBytes(32).toString('base64'))"
 ```
 
 `APP_KEYS` expects 4 comma-separated values.
+
+---
+
+## Localization
+
+Supported locales:
+
+- `en` for English
+- `ar` for Arabic
+
+In the admin panel, create the English version first, then use the translation
+action or locale switcher to add the Arabic version for the same document.
+
+REST requests can target a specific language with `locale`:
+
+```bash
+GET /api/works?locale=en&populate=*
+GET /api/works?locale=ar&populate=*
+GET /api/workshops?locale=en&populate=*
+GET /api/workshops?locale=ar&populate=*
+```
+
+If `locale` is omitted, Strapi returns the default locale.
 
 ---
 
@@ -50,6 +79,8 @@ Once running, the frontend can call:
 
 Useful query params:
 
+- `?locale=en` or `?locale=ar` - fetch a specific language version
+
 - `?populate=*` — include media + components
 - `?populate[mainImage]=true&populate[seo]=true` — populate selectively
 - `?filters[featured][$eq]=true` — only featured items
@@ -60,7 +91,7 @@ Example frontend fetch:
 
 ```ts
 const res = await fetch(
-  `${process.env.STRAPI_URL}/api/works?populate=*&sort=displayOrder:asc`
+  `${process.env.STRAPI_URL}/api/works?locale=ar&populate=*&sort=displayOrder:asc`
 );
 const { data } = await res.json();
 ```
