@@ -5,6 +5,7 @@ const { factories } = require('@strapi/strapi');
 const DEFAULT_POPULATE = {
   mainImage: true,
   gallery: true,
+  services: true,
   localizations: true,
   preEventMarketingPoints: {
     populate: {

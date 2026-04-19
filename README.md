@@ -97,6 +97,8 @@ const res = await fetch(
 const { data } = await res.json();
 ```
 
+`works` entries also expose a repeatable `services` field for admin-managed service labels per project.
+
 ---
 
 ## Content model

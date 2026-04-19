@@ -66,6 +66,17 @@
         }
       }
     },
+    "services": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.bullet-point",
+      "displayName": "Services",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
     "clientType": {
       "type": "enumeration",
       "enum": [
