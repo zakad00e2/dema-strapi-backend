@@ -70,13 +70,8 @@
       }
     },
     "datesDetails": {
-      "type": "text",
-      "displayName": "Dates",
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      }
+      "type": "date",
+      "displayName": "Date"
     },
     "mainImage": {
       "type": "media",

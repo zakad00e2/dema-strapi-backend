@@ -565,12 +565,7 @@ export interface ApiWorkshopWorkshop extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    datesDetails: Schema.Attribute.Text &
-      Schema.Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
+    datesDetails: Schema.Attribute.Date;
     displayOrder: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
     formatDetails: Schema.Attribute.Text &
       Schema.Attribute.SetPluginOptions<{
