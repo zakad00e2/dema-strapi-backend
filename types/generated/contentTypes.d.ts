@@ -617,10 +617,9 @@ export interface ApiWorkshopWorkshop extends Struct.CollectionTypeSchema {
           localized: true;
         };
       }>;
-    workshopType: Schema.Attribute.Enumeration<
-      ['Private Workshop', 'Open Workshops']
-    > &
-      Schema.Attribute.Required;
+    workshopType: Schema.Attribute.Enumeration<['openworkshop']> &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'openworkshop'>;
   };
 }
 

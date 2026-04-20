@@ -3,6 +3,7 @@
 const PUBLIC_READ_ACTIONS = ['find', 'findOne'];
 const PUBLIC_READ_CONTENT_TYPES = ['api::work.work', 'api::workshop.workshop'];
 const MEDIA_NORMALIZED_CONTENT_TYPES = new Set(PUBLIC_READ_CONTENT_TYPES);
+const FIXED_WORKSHOP_TYPE = 'openworkshop';
 const REQUIRED_I18N_LOCALES = [
   { code: 'en', name: 'English (en)' },
   { code: 'ar', name: 'Arabic (ar)' },
@@ -236,11 +237,29 @@ const ensureI18nLocales = async (strapi) => {
   }
 };
 
+const normalizeWorkshopTypes = async (strapi) => {
+  const workshops = await strapi.db.query('api::workshop.workshop').findMany({
+    select: ['id', 'workshopType'],
+  });
+
+  for (const workshop of workshops) {
+    if (workshop.workshopType === FIXED_WORKSHOP_TYPE) {
+      continue;
+    }
+
+    await strapi.db.query('api::workshop.workshop').update({
+      where: { id: workshop.id },
+      data: { workshopType: FIXED_WORKSHOP_TYPE },
+    });
+  }
+};
+
 module.exports = {
   register() {},
 
   async bootstrap({ strapi }) {
     await ensureI18nLocales(strapi);
+    await normalizeWorkshopTypes(strapi);
 
     strapi.documents.use(async (ctx, next) => {
       if (!MEDIA_NORMALIZED_CONTENT_TYPES.has(ctx.uid)) {

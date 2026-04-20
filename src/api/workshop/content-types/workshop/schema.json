@@ -19,9 +19,9 @@
     "workshopType": {
       "type": "enumeration",
       "enum": [
-        "Private Workshop",
-        "Open Workshops"
+        "openworkshop"
       ],
+      "default": "openworkshop",
       "required": true,
       "displayName": "Workshop Type"
     },

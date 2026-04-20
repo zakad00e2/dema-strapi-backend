@@ -130,7 +130,7 @@ const { data } = await res.json();
 | `fullDescription`  | richtext            |                               |
 | `mainImage`        | media (required)    | images only                   |
 | `gallery`          | media (multiple)    | optional                      |
-| `workshopType`     | enumeration         | in-person, online, hybrid     |
+| `workshopType`     | enumeration         | fixed to `openworkshop`       |
 | `targetAudience`   | string              |                               |
 | `date`             | datetime            |                               |
 | `duration`         | string              | e.g. "3 hours"                |
