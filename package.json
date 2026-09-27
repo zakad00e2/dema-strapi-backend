@@ -12,8 +12,8 @@
     "console": "strapi console"
   },
   "dependencies": {
-    "@strapi/plugin-users-permissions": "^5.0.0",
-    "@strapi/strapi": "^5.0.0",
+    "@strapi/plugin-users-permissions": "^5.55.1",
+    "@strapi/strapi": "^5.55.1",
     "better-sqlite3": "11.3.0",
     "pg": "8.13.0",
     "react": "^18.0.0",
@@ -22,6 +22,9 @@
     "styled-components": "^6.0.0"
   },
   "devDependencies": {},
+  "optionalDependencies": {
+    "@swc/core-win32-x64-msvc": "1.16.2"
+  },
   "engines": {
     "node": ">=18.0.0 <=22.x.x",
     "npm": ">=6.0.0"
