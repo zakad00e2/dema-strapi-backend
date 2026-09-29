@@ -46,6 +46,16 @@ function imageMimeType(asset) {
   return extension === '.png' ? 'image/png' : 'image/jpeg';
 }
 
+function uploadFilePayload(asset) {
+  const filepath = assetPathFor(asset);
+  return {
+    filepath,
+    originalFilename: asset.file,
+    mimetype: imageMimeType(asset),
+    size: fs.statSync(filepath).size,
+  };
+}
+
 async function existingSlugs(strapi, uid) {
   const documents = await strapi.documents(uid).findMany({ fields: ['slug'], locale: 'en', status: 'draft', limit: 1000 });
   return documents.map((document) => document.slug).filter(Boolean);
@@ -56,15 +66,9 @@ async function uploadAssets(strapi, manifest) {
   const files = new Map();
 
   for (const asset of mediaEntries(manifest)) {
-    const assetPath = assetPathFor(asset);
     const file = await upload.upload({
       data: { fileInfo: { name: asset.file, alternativeText: 'Dema site reconstruction asset' } },
-      files: {
-        path: assetPath,
-        name: asset.file,
-        type: imageMimeType(asset),
-        size: fs.statSync(assetPath).size,
-      },
+      files: uploadFilePayload(asset),
     });
     files.set(`media://${asset.id}`, file[0].id);
   }
@@ -150,4 +154,4 @@ if (require.main === module) {
   });
 }
 
-module.exports = { assetPathFor, assertSafeTarget, mediaEntries, parseArgs };
+module.exports = { assetPathFor, assertSafeTarget, mediaEntries, parseArgs, uploadFilePayload };
