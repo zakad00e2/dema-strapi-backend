@@ -50,7 +50,7 @@ function uploadFilePayload(asset) {
   const filepath = assetPathFor(asset);
   return {
     filepath,
-    originalFilename: asset.file,
+    originalFilename: path.basename(asset.file),
     mimetype: imageMimeType(asset),
     size: fs.statSync(filepath).size,
   };
@@ -67,7 +67,7 @@ async function uploadAssets(strapi, manifest) {
 
   for (const asset of mediaEntries(manifest)) {
     const file = await upload.upload({
-      data: { fileInfo: { name: asset.file, alternativeText: 'Dema site reconstruction asset' } },
+      data: { fileInfo: { name: path.basename(asset.file), alternativeText: 'Dema site reconstruction asset' } },
       files: uploadFilePayload(asset),
     });
     files.set(`media://${asset.id}`, file[0].id);

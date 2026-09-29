@@ -23,6 +23,6 @@ test('creates the Strapi 5 upload payload with a filepath', () => {
   const payload = uploadFilePayload(asset);
 
   assert.equal(payload.filepath, assetPathFor(asset));
-  assert.equal(payload.originalFilename, asset.file);
+  assert.equal(payload.originalFilename, path.basename(asset.file));
   assert.equal(payload.mimetype, 'image/jpeg');
 });
