@@ -40,6 +40,23 @@
         }
       }
     },
+    "heroTitle": {
+      "type": "text",
+      "pluginOptions": { "i18n": { "localized": true } }
+    },
+    "heroIntro": {
+      "type": "text",
+      "pluginOptions": { "i18n": { "localized": true } }
+    },
+    "campaignOverview": {
+      "type": "richtext",
+      "pluginOptions": { "i18n": { "localized": true } }
+    },
+    "yearLabel": {
+      "type": "string",
+      "maxLength": 32,
+      "pluginOptions": { "i18n": { "localized": true } }
+    },
     "mainImage": {
       "type": "media",
       "multiple": false,
@@ -47,6 +64,12 @@
       "allowedTypes": [
         "images"
       ]
+    },
+    "desktopImage": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": ["images"]
     },
     "gallery": {
       "type": "media",
@@ -138,6 +161,17 @@
           "localized": true
         }
       }
+    },
+    "metrics": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.metric",
+      "displayName": "Metrics",
+      "pluginOptions": { "i18n": { "localized": true } }
+    },
+    "featured": {
+      "type": "boolean",
+      "default": false
     },
     "displayOrder": {
       "type": "integer",

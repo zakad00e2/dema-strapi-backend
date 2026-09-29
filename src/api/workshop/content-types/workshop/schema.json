@@ -19,7 +19,12 @@
     "workshopType": {
       "type": "enumeration",
       "enum": [
-        "openworkshop"
+        "openworkshop",
+        "group",
+        "private",
+        "beginner",
+        "advanced",
+        "custom"
       ],
       "default": "openworkshop",
       "required": true,
@@ -49,6 +54,10 @@
         }
       }
     },
+    "fullDescription": {
+      "type": "richtext",
+      "pluginOptions": { "i18n": { "localized": true } }
+    },
     "whatYouWillLearnPoints": {
       "type": "component",
       "repeatable": true,
@@ -69,6 +78,30 @@
         }
       }
     },
+    "durationLabel": {
+      "type": "string",
+      "maxLength": 120,
+      "pluginOptions": { "i18n": { "localized": true } }
+    },
+    "datesLabel": {
+      "type": "string",
+      "maxLength": 120,
+      "pluginOptions": { "i18n": { "localized": true } }
+    },
+    "levelLabel": {
+      "type": "string",
+      "maxLength": 120,
+      "pluginOptions": { "i18n": { "localized": true } }
+    },
+    "ctaText": {
+      "type": "string",
+      "maxLength": 120,
+      "pluginOptions": { "i18n": { "localized": true } }
+    },
+    "ctaLink": {
+      "type": "string",
+      "maxLength": 2048
+    },
     "datesDetails": {
       "type": "date",
       "displayName": "Date"
@@ -78,6 +111,10 @@
       "multiple": false,
       "required": true,
       "allowedTypes": ["images"]
+    },
+    "featured": {
+      "type": "boolean",
+      "default": false
     },
     "displayOrder": {
       "type": "integer",
