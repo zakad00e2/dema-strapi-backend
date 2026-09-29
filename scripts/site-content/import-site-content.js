@@ -107,7 +107,8 @@ function applyAssets(entry, files) {
 }
 
 async function createLocalizedDocuments(strapi, uid, entries, files) {
-  for (const localizedEntries of groupBySlug(entries).values()) {
+  for (const group of groupBySlug(entries)) {
+    const localizedEntries = group.locales;
     const english = localizedEntries.find((entry) => entry.locale === 'en');
     const arabic = localizedEntries.find((entry) => entry.locale === 'ar');
     const created = await strapi.documents(uid).create({

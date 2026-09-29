@@ -40,5 +40,7 @@ test('groups localized records by their stable slug for Strapi document creation
   const groups = groupBySlug(content.works);
 
   assert.equal(groups.length, 4);
-  assert.equal(groups.find((group) => group.slug === 'the-obsidian-gala').locales.length, 2);
+  const group = groups.find((entry) => entry.slug === 'the-obsidian-gala');
+  assert.equal(group.locales.length, 2);
+  assert.equal(group.locales.find((entry) => entry.locale === 'en').data.title, 'Besan Khalaily – Spring Launch');
 });
