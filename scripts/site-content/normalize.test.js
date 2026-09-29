@@ -4,7 +4,7 @@ const assert = require('node:assert/strict');
 const { readFileSync } = require('node:fs');
 const { join } = require('node:path');
 const test = require('node:test');
-const { normalizeSiteContent } = require('./normalize');
+const { groupBySlug, normalizeSiteContent } = require('./normalize');
 
 const snapshot = JSON.parse(readFileSync(join(__dirname, '../../data/site-content.json'), 'utf8'));
 
@@ -33,4 +33,12 @@ test('normalizes every published entry into Arabic and English Strapi locale inp
   assert.equal(featuredWorkshop.data.ctaText, 'Enquire Now');
   assert.equal(featuredWorkshop.data.featured, true);
   assert.match(featuredWorkshop.assets.mainImage, /^media:\/\//);
+});
+
+test('groups localized records by their stable slug for Strapi document creation', () => {
+  const content = normalizeSiteContent(snapshot);
+  const groups = groupBySlug(content.works);
+
+  assert.equal(groups.length, 4);
+  assert.equal(groups.find((group) => group.slug === 'the-obsidian-gala').locales.length, 2);
 });

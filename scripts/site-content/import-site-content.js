@@ -66,8 +66,18 @@ async function uploadAssets(strapi, manifest) {
   const files = new Map();
 
   for (const asset of mediaEntries(manifest)) {
+    const filename = path.basename(asset.file);
+    const existing = await strapi.db.query('plugin::upload.file').findOne({
+      select: ['id'],
+      where: { name: filename },
+    });
+    if (existing) {
+      files.set(`media://${asset.id}`, existing.id);
+      continue;
+    }
+
     const file = await upload.upload({
-      data: { fileInfo: { name: path.basename(asset.file), alternativeText: 'Dema site reconstruction asset' } },
+      data: { fileInfo: { name: filename, alternativeText: 'Dema site reconstruction asset' } },
       files: uploadFilePayload(asset),
     });
     files.set(`media://${asset.id}`, file[0].id);

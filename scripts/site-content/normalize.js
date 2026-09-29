@@ -138,4 +138,4 @@ function planImport(existing, normalized, { allowUpdates = false } = {}) {
   return { creates, collisions, updates };
 }
 
-module.exports = { normalizeSiteContent, planImport };
+module.exports = { groupBySlug, normalizeSiteContent, planImport };
