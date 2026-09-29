@@ -39,3 +39,9 @@ test('Workshop lifecycle leaves the editor-selected workshop type intact', () =>
 
   assert.doesNotMatch(lifecycle, /workshopType\s*=\s*WORKSHOP_TYPE/);
 });
+
+test('Bootstrap does not normalize existing workshop types to one legacy value', () => {
+  const bootstrap = fs.readFileSync(path.join(root, 'src/index.js'), 'utf8');
+
+  assert.doesNotMatch(bootstrap, /normalizeWorkshopTypes/);
+});
