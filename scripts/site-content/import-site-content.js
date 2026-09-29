@@ -32,6 +32,20 @@ function loadSnapshot() {
   };
 }
 
+function mediaEntries(manifest) {
+  return manifest.files ?? manifest.media ?? [];
+}
+
+function assetPathFor(asset) {
+  return path.join(root, 'data', asset.file);
+}
+
+function imageMimeType(asset) {
+  if (asset.mimeType) return asset.mimeType;
+  const extension = path.extname(asset.file).toLowerCase();
+  return extension === '.png' ? 'image/png' : 'image/jpeg';
+}
+
 async function existingSlugs(strapi, uid) {
   const documents = await strapi.documents(uid).findMany({ fields: ['slug'], locale: 'en', status: 'draft', limit: 1000 });
   return documents.map((document) => document.slug).filter(Boolean);
@@ -41,14 +55,14 @@ async function uploadAssets(strapi, manifest) {
   const upload = strapi.plugin('upload').service('upload');
   const files = new Map();
 
-  for (const asset of manifest.media) {
-    const assetPath = path.join(root, 'data', 'site-media', asset.file);
+  for (const asset of mediaEntries(manifest)) {
+    const assetPath = assetPathFor(asset);
     const file = await upload.upload({
       data: { fileInfo: { name: asset.file, alternativeText: 'Dema site reconstruction asset' } },
       files: {
         path: assetPath,
         name: asset.file,
-        type: asset.mimeType,
+        type: imageMimeType(asset),
         size: fs.statSync(assetPath).size,
       },
     });
@@ -136,4 +150,4 @@ if (require.main === module) {
   });
 }
 
-module.exports = { assertSafeTarget, parseArgs };
+module.exports = { assetPathFor, assertSafeTarget, mediaEntries, parseArgs };
