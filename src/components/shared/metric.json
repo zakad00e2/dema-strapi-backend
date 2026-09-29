@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_shared_metrics",
+  "info": {
+    "displayName": "Metric",
+    "icon": "chartPie"
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string",
+      "required": true,
+      "maxLength": 120,
+      "pluginOptions": { "i18n": { "localized": true } }
+    },
+    "value": {
+      "type": "string",
+      "required": true,
+      "maxLength": 120
+    }
+  }
+}
