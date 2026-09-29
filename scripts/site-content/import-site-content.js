@@ -2,7 +2,7 @@
 
 const fs = require('node:fs');
 const path = require('node:path');
-const { groupBySlug, normalizeSiteContent, planImport } = require('./normalize');
+const { normalizeSiteContent, planImport } = require('./normalize');
 
 const root = path.resolve(__dirname, '../..');
 const contentPath = path.join(root, 'data', 'site-content.json');
@@ -107,7 +107,7 @@ function applyAssets(entry, files) {
 }
 
 async function createLocalizedDocuments(strapi, uid, entries, files) {
-  for (const group of groupBySlug(entries)) {
+  for (const group of entries) {
     const localizedEntries = group.locales;
     const english = localizedEntries.find((entry) => entry.locale === 'en');
     const arabic = localizedEntries.find((entry) => entry.locale === 'ar');

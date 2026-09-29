@@ -30,3 +30,11 @@ test('reports an existing editor record without scheduling an overwrite', () => 
   assert.deepEqual(plan.collisions, [{ kind: 'work', slug: 'the-obsidian-gala' }]);
   assert.equal(plan.updates.length, 0);
 });
+
+test('plans groups that retain one input for each locale', () => {
+  const normalized = normalizeSiteContent(snapshot);
+  const plan = planImport({ workSlugs: [], workshopSlugs: [] }, normalized);
+  const firstWork = plan.creates.works[0];
+
+  assert.deepEqual(firstWork.locales.map((entry) => entry.locale).sort(), ['ar', 'en']);
+});
