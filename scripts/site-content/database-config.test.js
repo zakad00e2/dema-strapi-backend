@@ -2,7 +2,7 @@
 
 const assert = require('node:assert/strict');
 const test = require('node:test');
-const databaseConfig = require('./database');
+const databaseConfig = require('../../config/database');
 
 function env(values) {
   const read = (key, fallback) => values[key] ?? fallback;
